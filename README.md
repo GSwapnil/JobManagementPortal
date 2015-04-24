@@ -10,9 +10,9 @@ This application allows user to:
 
 # Installation
 
-Download the repository
-Install npm modules: npm install
-Intall bower: npm install -g bower
-Install bower dependencies bower install
-Start up the server: node server.js
-View in browser at http://localhost:8080
+1. Download the repository
+2. Install npm modules: npm install
+3. Intall bower: npm install -g bower
+4. Install bower dependencies bower install
+5. Start up the server: node server.js
+6. View in browser at http://localhost:8080
