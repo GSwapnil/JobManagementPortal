@@ -4,6 +4,7 @@
         <input type="text" id="priority" ng-model="job.priority"/>
     </div>
     <button class="btn btn-primary" type="submit" ng-click="saveJob()">Bookmark Job</button>
+    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
 </form>
 
 <table class="table table-striped">

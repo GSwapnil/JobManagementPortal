@@ -46,11 +46,28 @@ module.exports = {
     },
 
     countJobsForCompany : function(companyId, callback){
+
         models.Job.where({ 'companyID': companyId }).count(function (err, count) {
             if (err) {
                 callback("fail");
             } else {
                 callback(count);
+            }
+        });
+    },
+
+    /* Find a job by its jobId */
+    findByJobId : function(jobId, callback) {
+
+        models.Job.findOne({'jobId' : jobId}, function(err, job) {
+            if (err) {
+                console.log(err);
+            } else if (job) {
+                console.log("Job found");
+                callback(job);
+            } else {
+                console.log("Job not found");
+                callback(null);
             }
         });
     }

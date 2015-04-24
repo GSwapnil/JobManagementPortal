@@ -68,10 +68,17 @@ module.exports = function(job, passport) {
 	job.post('/saveJob', function(req, res) {
 		var job = req.body.job;
 		var modelJob =  new models.Job(job);
-
 		modelJob.userId = req.user._id;
-		jobDao.saveJob(modelJob, function(result) {
-			res.send(result);	
+
+		console.log("Job id:" + modelJob.jobId);
+		jobDao.findByJobId(modelJob.jobId, function(result) {
+		    if(result == null) {
+				jobDao.saveJob(modelJob, function(result) {
+					res.send(result);	
+				});
+		    } else {
+				res.send("exists");
+		    }
 		});
 	});
 	

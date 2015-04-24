@@ -114,6 +114,8 @@ job.controller('ViewJobDetailsController', function($scope, GetJobsService, $rou
     $scope.job = {};
     var jobId = $routeParams.jobId;
 
+    $scope.alerts = [];
+
     var getData = function(){
         GetJobsService.getDetails(jobId).then(function(job) {
             $scope.job = job;
@@ -123,6 +125,7 @@ job.controller('ViewJobDetailsController', function($scope, GetJobsService, $rou
     getData();
 
     $scope.saveJob = function() {
+
         company = {};
         company.name = $scope.job.company;
         company.url = $scope.job.company_url;
@@ -143,8 +146,16 @@ job.controller('ViewJobDetailsController', function($scope, GetJobsService, $rou
             projectedJob.url = $scope.job.url;
             projectedJob.companyID = companyId;
 
-            GetJobsService.saveJob(projectedJob);
-            $location.path( "/viewMyJobs" );
+            //GetJobsService.saveJob(projectedJob);
+            GetJobsService.saveJob(projectedJob).then(function(status) {
+                if (status == "exists") {
+                    $scope.alerts.push({msg: 'You have the job already bookmarked !!'});
+                    console.log('exists');
+                } else {
+                    $location.path( "/viewMyJobs" );
+                }
+            });
+            
         });
     };
 });
